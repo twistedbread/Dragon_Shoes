@@ -1,0 +1,150 @@
+/* Tables */
+table.table>thead>tr>th {
+    background-color: #0e0c28;
+    color: #fff;
+}
+
+.nav-left-sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #0e0c28;
+    color: white;
+    transition: width 0.3s;
+}
+
+.nav-left-sidebar.collapsed {
+    width: 70px;
+}
+
+.nav-left-sidebar .navbar-nav {
+    padding: 0;
+}
+
+.nav-left-sidebar.collapsed .navbar-nav {
+    display: none;
+}
+
+.nav-left-sidebar .nav-link {
+    color: white;
+}
+
+.toggle-btn {
+    transition: left 0.3s;
+    cursor: pointer;
+}
+
+.nav-left-sidebar.collapsed+.toggle-btn {
+    left: 50px;
+}
+
+.dashboard-wrapper {
+    transition: margin-left 0.3s;
+    margin-left: 250px;
+}
+
+.nav-left-sidebar.collapsed~.dashboard-wrapper {
+    margin-left: 70px;
+}
+
+.dashboard-ecommerce {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* Admin Inventory Add New */
+.admin-inventory .image-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.admin-inventory .image-wrapper {
+    position: relative;
+    margin: 10px;
+}
+
+.admin-inventory .image-wrapper img {
+    max-width: 100px;
+    display: block;
+}
+
+.admin-inventory .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#togDiv {
+    display: none;
+}
+
+
+/* Admin Revenue */
+.admin-revenue p {
+    margin: 0 0 20px;
+    line-height: 1.5;
+}
+
+.admin-revenue main {
+    width: 100%;
+    /* padding: 20px 20px; */
+    /* margin: 0 auto; */
+    /* margin-left: 0px; */
+    /* background: #fff; */
+    /* border: 1px solid black; */
+}
+
+.admin-revenue section {
+    display: none;
+    padding: 20px 0;
+    border: 1px solid black;
+    /* border-top: 1px solid black; */
+    background-color: #fff;
+
+}
+
+
+
+.admin-revenue label {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+    border: 1px solid transparent;
+}
+
+.admin-revenue label:before {
+    font-family: fontawesome;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+
+.admin-revenue label:hover {
+    color: #888;
+    cursor: pointer;
+}
+
+.admin-revenue input:checked+label {
+    color: #0e0c28;
+    border: 1px solid black;
+    border-top: 2px solid black;
+    border-bottom: 1px solid #fff;
+}
+
+.admin-revenue #byProduct:checked~#byProductDiv,
+.admin-revenue #byCategory:checked~#byCategoryDiv,
+.admin-revenue #byMonth:checked~#byMonthDiv {
+    display: block;
+}
+
+.ecommerce-widge main span {
+    vertical-align: -5px;
+    padding-right: 5px;
+}

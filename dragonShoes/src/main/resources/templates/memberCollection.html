@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/user.css">
+    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap"
+        rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+
+<body id="userCollection">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+            <title>Search</title>
+            <path fill="currentColor"
+                d="M19 3C13.488 3 9 7.488 9 13c0 2.395.84 4.59 2.25 6.313L3.281 27.28l1.439 1.44l7.968-7.969A9.922 9.922 0 0 0 19 23c5.512 0 10-4.488 10-10S24.512 3 19 3zm0 2c4.43 0 8 3.57 8 8s-3.57 8-8 8s-8-3.57-8-8s3.57-8 8-8z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="user" viewBox="0 0 16 16">
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="cart" viewBox="0 0 16 16">
+            <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="arrow-right" viewBox="0 0 32 32">
+            <path fill="currentColor"
+                d="M18.719 6.781L17.28 8.22L24.063 15H4v2h20.063l-6.782 6.781l1.438 1.438l8.5-8.5l.687-.719l-.687-.719z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="arrow-left" viewBox="0 0 32 32">
+            <path fill="currentColor"
+                d="m13.281 6.781l-8.5 8.5l-.687.719l.687.719l8.5 8.5l1.438-1.438L7.938 17H28v-2H7.937l6.782-6.781z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="quote" viewBox="0 0 24 24">
+            <path fill="currentColor" d="m15 17l2-4h-4V6h7v7l-2 4h-3Zm-9 0l2-4H4V6h7v7l-2 4H6Z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="shipping-fast" viewBox="0 0 32 32">
+            <path fill="black"
+                d="M0 6v2h19v15h-6.156c-.446-1.719-1.992-3-3.844-3c-1.852 0-3.398 1.281-3.844 3H4v-5H2v7h3.156c.446 1.719 1.992 3 3.844 3c1.852 0 3.398-1.281 3.844-3h8.312c.446 1.719 1.992 3 3.844 3c1.852 0 3.398-1.281 3.844-3H32v-8.156l-.063-.157l-2-6L29.72 10H21V6zm1 4v2h9v-2zm20 2h7.281L30 17.125V23h-1.156c-.446-1.719-1.992-3-3.844-3c-1.852 0-3.398 1.281-3.844 3H21zM2 14v2h6v-2zm7 8c1.117 0 2 .883 2 2s-.883 2-2 2s-2-.883-2-2s.883-2 2-2zm16 0c1.117 0 2 .883 2 2s-.883 2-2 2s-2-.883-2-2s.883-2 2-2z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="shopping-cart" viewBox="0 0 32 32">
+            <path fill="black"
+                d="M5 7c-.55 0-1 .45-1 1s.45 1 1 1h2.219l2.625 10.5c.222.89 1.02 1.5 1.937 1.5H23.25c.902 0 1.668-.598 1.906-1.469L27.75 10H11l.5 2h13.656l-1.906 7H11.781L9.156 8.5A1.983 1.983 0 0 0 7.22 7zm17 14c-1.645 0-3 1.355-3 3s1.355 3 3 3s3-1.355 3-3s-1.355-3-3-3zm-9 0c-1.645 0-3 1.355-3 3s1.355 3 3 3s3-1.355 3-3s-1.355-3-3-3zm0 2c.563 0 1 .438 1 1c0 .563-.438 1-1 1c-.563 0-1-.438-1-1c0-.563.438-1 1-1zm9 0c.563 0 1 .438 1 1c0 .563-.438 1-1 1c-.563 0-1-.438-1-1c0-.563.438-1 1-1z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="gift" viewBox="0 0 32 32">
+            <path fill="black"
+                d="M12 5c-1.645 0-3 1.355-3 3c0 .352.074.684.188 1H4v6h1v13h22V15h1V9h-5.188A2.95 2.95 0 0 0 23 8c0-1.645-1.355-3-3-3c-1.75 0-2.938 1.328-3.719 2.438c-.105.148-.187.292-.281.437c-.094-.145-.176-.29-.281-.438C14.938 6.329 13.75 5 12 5zm0 2c.625 0 1.438.672 2.063 1.563c.152.218.128.23.25.437H12c-.566 0-1-.434-1-1c0-.566.434-1 1-1zm8 0c.566 0 1 .434 1 1c0 .566-.434 1-1 1h-2.313c.122-.207.098-.219.25-.438C18.563 7.673 19.375 7 20 7zM6 11h20v2h-9v-1h-2v1H6zm1 4h18v11h-8V16h-2v10H7z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="return" viewBox="0 0 32 32">
+            <path fill="black"
+                d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13h-2c0 6.086-4.914 11-11 11S5 22.086 5 16S9.914 5 16 5c3.875 0 7.262 1.984 9.219 5H20v2h8V4h-2v3.719C23.617 4.844 20.02 3 16 3z" />
+        </symbol>
+    </svg>
+
+    <div class="modal fade" id="searchDiv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 1000px;">
+                <div class="modal-body">
+                    <button type="button" class="btn-close "
+                        style="float: right; margin-right: -15px; margin-top: -15px;" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    <div class="form-outline" data-mdb-input-init id="search-bar">
+                        <form method="GET">
+                            <input type="search" id="data" name="data" class="form-control"
+                                placeholder="Search by ID, Name, Email" />
+                            <button type="submit" class="btn">
+                                <!-- <i class="fas fa-search"></i> -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="white" class="bi bi-search"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    <div id="pop-searches" style="margin-top: 30px;">
+                        <p style="font-size: 18px; margin-bottom: -5px;">Popular Searches</p>
+                        <ul class=" navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    Air Force 1
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    Jordan
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    Air Max
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    Air Blazer
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header id="header" class="site-header text-black">
+        <nav id="header-nav" class="navbar navbar-expand-lg px-3" style="box-shadow: none;">
+            <div class="container-fluid">
+                <a class="navbar-brand logo" th:href="@{/member/home/{id}(id=${user.id})}">
+                    <img src="/images/demo/dragon9.jpg" class="logo">
+                </a>
+
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar"
+                    aria-labelledby="bdNavbarOffcanvasLabel">
+                    <div class="offcanvas-header px-4 pb-0">
+                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas"
+                            aria-label="Close" data-bs-target="#bdNavbar"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul id="navbar"
+                            class="navbar-nav text-capitalize justify-content-end align-items-center flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link me-4" th:href="@{/member/collection/{id}(id=${user.id})}"><b>Collection</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link me-4"  href="#aboutUs"><b>About Us</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link me-4" ><b>FAQs</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <div class="user-items ps-5">
+                                    <ul class="d-flex justify-content-end list-unstyled">
+                                        <li class="pe-3">
+                                            <a id="searchIcon" data-bs-toggle="modal" data-bs-target="#searchDiv">
+                                                <svg class="search" width="25" height="25">
+                                                    <use xlink:href="#search"></use>
+                                                </svg>
+                                            </a>
+
+                                        </li>
+                                        <li class="pe-3">
+                                            <a href="#u">
+                                                <svg class="user" width="25" height="25">
+                                                    <use xlink:href="#user"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li class="pe-3">
+                                            <a id="cartIcon" data-bs-toggle="modal">
+                                                <svg class="cart" width="25" height="25">
+                                                    <use xlink:href="#cart"></use>
+                                                </svg>
+                                            </a>
+                                            <div class="previewCart p-4" style="width: 530px; background-color: white;"
+                                                id="previewCart">
+                                                <div id="previewCartDiv">
+                                                    <ul style="margin-left: 370px;">
+                                                        <li><strong>Quantity</strong></li>
+                                                    </ul>
+                                                    <div style="width: 100%;">
+                                                        <div id="previewCartItem">
+                                                            <div id="item">
+                                                                <img src="/images/demo/pic39.jpg">
+                                                                <div>
+                                                                    <p><strong>Air Jordan 1 Lost & Found</strong></p>
+                                                                    <p>Men's Shoes</p>
+                                                                    <p>Size US 8.5</p>
+                                                                    <p>$200</p>
+                                                                </div>
+                                                            </div>
+                                                            <div id="qty">
+                                                                <p>2</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="width: 100%;">
+                                                        <div id="previewCartItem">
+                                                            <div id="item">
+                                                                <img src="/images/demo/pic39.jpg">
+                                                                <div>
+                                                                    <p><strong>Air Jordan 1 Lost & Found</strong></p>
+                                                                    <p>Men's Shoes</p>
+                                                                    <p>Size US 8.5</p>
+                                                                    <p>$200</p>
+                                                                </div>
+                                                            </div>
+                                                            <div id="qty">
+                                                                <p>2</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="width: 100%;">
+                                                        <div id="previewCartItem">
+                                                            <div id="item">
+                                                                <img src="/images/demo/pic39.jpg">
+                                                                <div>
+                                                                    <p><strong>Air Jordan 1 Lost & Found</strong></p>
+                                                                    <p>Men's Shoes</p>
+                                                                    <p>Size US 8.5</p>
+                                                                    <p>$200</p>
+                                                                </div>
+                                                            </div>
+                                                            <div id="qty">
+                                                                <p>2</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr id="prevHr"
+                                                    style="margin-left: 50%; width: 50%;border: 1px solid black;">
+                                                <p style="margin-left: 80%;">Total: $600</p>
+                                                <a style="margin-left: 50px;" th:href="@{/member/cart/{id}(id=${user.id})}">
+                                                    <button id="checkout">Checkout</button>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="collection-body">
+        <div id="brief-info">
+            <h4>Shoes (1000)</h4>
+        </div>
+        <div id="fil-search">
+            <div class="container ">
+                <div class="scrollbar" id="fill-search-scroll">
+                    <div style="margin-left: -30px;">
+                        <ul style="margin-left: -5px; margin-top: 180px;">
+                            <li>
+                                <a>Air Force</a>
+                            </li>
+                            <li>
+                                <a>Jordan</a>
+                            </li>
+                            <li>
+                                <a>Air Max</a>
+                            </li>
+                            <li>
+                                <a>Air Blazer</a>
+                            </li>
+                            <li>
+                                <a>Lifestyle</a>
+                            </li>
+                            <li>
+                                <a>Jordan</a>
+                            </li>
+                            <li>
+                                <a>Running</a>
+                            </li>
+                            <li>
+                                <a>Basketball</a>
+                            </li>
+                            <li>
+                                <a>Training & Gym</a>
+                            </li>
+                            <li>
+                                <a>Football</a>
+                            </li>
+                            <li>
+                                <a>Skateboarding</a>
+                            </li>
+                            <li>
+                                <a>Golf</a>
+                            </li>
+                            <li>
+                                <a>Tennis</a>
+                            </li>
+                            <li>
+                                <a>Athletics</a>
+                            </li>
+                        </ul>
+
+                        <div class="accordion" id="fill-search-accordion" style="width: 85%;">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#gender">
+                                        Gender
+                                    </button>
+                                </h2>
+                                <div id="gender" class="accordion-collapse collapse ">
+                                    <div class="accordion-body">
+                                        <input type="checkbox" id="male" name="male" value="male">
+                                        <label for="male">Male</label><br>
+                                        <input type="checkbox" id="female" name="female" value="female">
+                                        <label for="female">Female</label><br>
+                                        <input type="checkbox" id="unisex" name="unisex" value="unisex">
+                                        <label for="unisex">Unisex</label><br>
+                                        <input type="checkbox" id="kid" name="kid" value="kid">
+                                        <label for="kid">Kid</label><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#color">
+                                        Color
+                                    </button>
+                                </h2>
+                                <div id="color" class="accordion-collapse collapse ">
+                                    <div class="accordion-body">
+                                        <div class="row" id="fil-color">
+                                            <a class="col">
+                                                <div style="background-color: blue; ">
+                                                </div>
+                                                <span style="margin-left: 2px;">Blue</span>
+                                            </a>
+                                            <a class="col">
+                                                <div style="background-color: black; ">
+                                                </div>
+                                                <span>Black</span>
+                                            </a>
+                                            <a class="col">
+                                                <div style="background-color: red; ">
+                                                </div>
+                                                <span style="margin-left: 3px;">Red</span>
+                                            </a>
+                                        </div>
+                                        <div class="row" id="fil-color">
+                                            <a class="col">
+                                                <div style="background-color: blue; ">
+                                                </div>
+                                                <span style="margin-left: 2px;">Blue</span>
+                                            </a>
+                                            <a class="col">
+                                                <div style="background-color: black; ">
+                                                </div>
+                                                <span>Black</span>
+                                            </a>
+                                            <a class="col">
+                                                <div style="background-color: red; ">
+                                                </div>
+                                                <span style="margin-left: 3px;">Red</span>
+                                            </a>
+                                        </div>
+                                        <div class="row" id="fil-color">
+                                            <a class="col">
+                                                <div style="background-color: blue; ">
+                                                </div>
+                                                <span style="margin-left: 2px;">Blue</span>
+                                            </a>
+                                            <a class="col">
+                                                <div style="background-color: black; ">
+                                                </div>
+                                                <span>Black</span>
+                                            </a>
+                                            <a class="col">
+                                                <div style="background-color: red; ">
+                                                </div>
+                                                <span style="margin-left: 3px;">Red</span>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#shoeheight">
+                                        Shoe Height
+                                    </button>
+                                </h2>
+                                <div id="shoeheight" class="accordion-collapse collapse ">
+                                    <div class="accordion-body">
+                                        <input type="checkbox" id="male" name="male" value="male">
+                                        <label for="male">Low</label><br>
+                                        <input type="checkbox" id="female" name="female" value="female">
+                                        <label for="female">Mid</label><br>
+                                        <input type="checkbox" id="unisex" name="unisex" value="unisex">
+                                        <label for="unisex">High</label><br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="dis-shoe">
+
+            <div class="row row-cols-1 row-cols-lg-3 images" style="margin-top: 160px;">
+                <div class="col p-5" th:each="footwear : ${footwearList}">
+                    <a th:href="@{/member/collection/{id}/{fid}(id=${footwear.id},fid=${footwear.id})}" style="text-decoration: none;">
+                    <!-- <a th:href="@{/users/bookinfo/{uid}/{bid}(uid=${user.id},bid=${book.id})}"> -->
+                        <img src="/images/demo/pic63.png">
+                        <div style="margin-top: 10px;">
+                            <p th:text="${footwear.name}" style="font-weight:bold;"></p>
+                            <p th:text="${footwear.gender}"></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer class="footer" id="aboutUs">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col" style="width: 35%;">
+                    <h4>company</h4>
+                    <ul>
+                        <li class="footer-text">Step into style and comfort with our premium footwear collection,
+                            designed to elevate your every stride.</li>
+                        <li><a href="#">
+                                <span class="material-symbols-outlined">
+                                    location_on
+                                </span> Mandalay, Myanmar
+                            </a></li>
+                        <li><a href="#">
+                                <span class="material-symbols-outlined">
+                                    call
+                                </span> 0912345678
+                            </a></li>
+                        <li><a href="#">
+                                <span class="material-symbols-outlined">
+                                    mail
+                                </span> dragonshoes@gmail.com
+                            </a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" style="width: 25%;">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">order</a></li>
+                        <li><a href="#">collections</a></li>
+                        <li><a href="#">Account</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col vstack" style="width: 40%;">
+                    <div>
+                        <h4>follow us</h4>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        </div>
+                    </div>
+                    <div style="margin-top: 50px;">
+                        <h4>Subscribe</h4>
+                        <ul>
+                            <li class="footer-text">
+                                Stay ahead in style—subscribe to our newsletter for exclusive offers, latest arrivals,
+                                and insider tips!
+                            </li>
+                            <div class="subscribe-form" style="margin-left: -30px; font-size: 18px;">
+                                <form action="#">
+                                    <input type="text" placeholder="Email Address">
+                                    <button style="height: 60px;"><i class="fa-sharp fa-solid fa-paper-plane fa-lg"
+                                            style="color: #ffffff;"></i></button>
+                                </form>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/modernizr.js"></script>
+    <script scr="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"></script>
+
+    <script>
+        function adjustFooter() {
+            const pageHeight = document.body.scrollHeight;
+            // const contentHeight = document.getElementById('userCollection').offsetHeight;
+            // const windowHeight = window.innerHeight;
+            const footer = document.getElementById('aboutUs');
+            const extraHeight = 0; // Add 200px to the page height
+
+            // Calculate total height including the extra 200px
+            const totalHeight = pageHeight + extraHeight;
+
+            // If total height is less than the window height, adjust the margin-top of the footer
+            const marginTopValue = totalHeight - footer.offsetHeight;
+            footer.style.marginTop = `${totalHeight}px`;
+        }
+
+        window.addEventListener('load', adjustFooter);
+        window.addEventListener('resize', adjustFooter);
+
+        window.addEventListener('scroll', function () {
+            var filSearch = document.querySelector('#fil-search');
+            var footer = document.querySelector('footer');
+            var filSearchHeight = filSearch.offsetHeight;
+            var footerTop = footer.offsetTop;
+            var scrollPosition = window.scrollY + window.innerHeight;
+
+            if (scrollPosition < footerTop) {
+                filSearch.style.position = 'fixed';
+                filSearch.style.top = '0px'; // Adjust based on your requirement
+            } else {
+                filSearch.style.position = 'absolute';
+                filSearch.style.top = (footerTop - filSearchHeight - 20) + 'px'; // Adjust 20px as needed for spacing
+            }
+        });
+
+        const icon = document.getElementById('cartIcon');
+        const infoBox = document.querySelector('.previewCart');
+
+        icon.addEventListener('click', function () {
+            if (infoBox.style.display === 'block') {
+                infoBox.style.display = 'none';
+            } else {
+                infoBox.style.display = 'block';
+                var cartHeight = document.getElementById('previewCart').offsetHeight;
+                const extraHeight = -120; 
+                const totalHeight = cartHeight + extraHeight;
+                prevHr.style.marginTop = `${totalHeight}px`;
+            }
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!icon.contains(event.target) && !infoBox.contains(event.target)) {
+                infoBox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

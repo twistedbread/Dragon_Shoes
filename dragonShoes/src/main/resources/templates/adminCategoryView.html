@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/admin.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/libs/css/style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <title>Admin Dashboard</title>
+</head>
+
+<body id="admin-home">
+    <div class="dashboard-main-wrapper" style="margin-top: -80px;">
+        <div class="nav-left-sidebar sidebar-dark" style="margin-top: -60px;">
+            <div class="menu-list">
+                <span class="material-symbols-outlined toggle-btn"
+                    style="padding: 20px; display: block; color: white; ">
+                    menu
+                </span>
+                <nav class="navbar navbar-expand-lg navbar-light">
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav flex-column">
+                            <li class="nav-item ">
+                                <a class="nav-link " th:href="@{/admin/home/{id}(id=${user.id})}">
+                                    <span class="material-symbols-outlined"
+                                        style="vertical-align: -5px; padding-right: 5px;">
+                                        home
+                                    </span>
+                                    Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="collapse" aria-expanded="false"
+                                    data-target="#submenu-1" aria-controls="submenu-1">
+                                    <span class="material-symbols-outlined" style="padding-right: 5px;">
+                                        category
+                                    </span>&nbsp;Category</a>
+                                <div id="submenu-1" class="submenu show">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" th:href="@{/admin/categoryView/{id}(id=${user.id})}">View</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" th:href="@{/admin/categoryAddNew/{id}(id=${user.id})}">Add New</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" aria-expanded="false"
+                                    data-target="#submenu-2" aria-controls="submenu-2">
+                                    <span class="material-symbols-outlined" style="padding-right: 5px;">
+                                        inventory
+                                    </span>&nbsp;Inventory</a>
+                                <div id="submenu-2" class="collapse submenu">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" th:href="@{/admin/inventoryView/{id}(id=${user.id})}">View</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" th:href="@{/admin/inventoryAddNew/{id}(id=${user.id})}">Add New</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="collapse" aria-expanded="false"
+                                    data-target="#submenu-3" aria-controls="submenu-3">
+                                    <span class="material-symbols-outlined" style="padding-right: 5px;">
+                                        receipt_long
+                                    </span>
+                                    &nbsp;Report</a>
+                                <div id="submenu-3" class="collapse submenu">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" th:href="@{/admin/reportOrders/{id}(id=${user.id})}">Orders</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" th:href="@{/admin/reportRevenue/{id}(id=${user.id})}">Revenue</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" th:href="@{/admin/account/{id}(id=${user.id})}">
+                                    <span class="material-symbols-outlined"
+                                        style="vertical-align: -5px; padding-right: 5px;">
+                                        settings
+                                    </span>
+                                    Account</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="dashboard-wrapper">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <!-- ============================================================== -->
+                    <!-- pageheader  -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">Category</h2>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li>Dashboard</li>
+                                            <span class="material-symbols-outlined" style="font-size: 18px;">
+											chevron_right
+											</span>
+                                            <li>Category</li>
+                                            <span class="material-symbols-outlined" style="font-size: 18px;">
+											chevron_right
+											</span>
+                                            <li aria-current="page">View</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ecommerce-widget">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0" style="color: white; width:50px">ID</th>
+                                                        <th class="border-0" style="width: 280px;">Category Description</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="cat : ${catList}">
+                                                        <td th:text="${cat.id}">1</td>
+                                                        <td th:text="${cat.description}"></td>
+                                                        <td style="text-align:right; "><a style="color:black;" ><span class="material-symbols-outlined" >edit</span></a></td>
+														<td style="width:10px; "><a style="color:black;" ><span class="material-symbols-outlined" >delete</span></a></td>
+					
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $('.toggle-btn').on('click', function () {
+                $('.nav-left-sidebar').toggleClass('collapsed');
+                $(this).toggleClass('collapsed');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Dragon Shoes</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href="/css/user.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/31ae109b78.js" crossorigin="anonymous"></script>
+</head>
+
+<body id="userhome">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+            <title>Search</title>
+            <path fill="currentColor"
+                d="M19 3C13.488 3 9 7.488 9 13c0 2.395.84 4.59 2.25 6.313L3.281 27.28l1.439 1.44l7.968-7.969A9.922 9.922 0 0 0 19 23c5.512 0 10-4.488 10-10S24.512 3 19 3zm0 2c4.43 0 8 3.57 8 8s-3.57 8-8 8s-8-3.57-8-8s3.57-8 8-8z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="user" viewBox="0 0 16 16">
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="cart" viewBox="0 0 16 16">
+            <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="arrow-right" viewBox="0 0 32 32">
+            <path fill="currentColor"
+                d="M18.719 6.781L17.28 8.22L24.063 15H4v2h20.063l-6.782 6.781l1.438 1.438l8.5-8.5l.687-.719l-.687-.719z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="arrow-left" viewBox="0 0 32 32">
+            <path fill="currentColor"
+                d="m13.281 6.781l-8.5 8.5l-.687.719l.687.719l8.5 8.5l1.438-1.438L7.938 17H28v-2H7.937l6.782-6.781z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="quote" viewBox="0 0 24 24">
+            <path fill="currentColor" d="m15 17l2-4h-4V6h7v7l-2 4h-3Zm-9 0l2-4H4V6h7v7l-2 4H6Z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="shipping-fast" viewBox="0 0 32 32">
+            <path fill="black"
+                d="M0 6v2h19v15h-6.156c-.446-1.719-1.992-3-3.844-3c-1.852 0-3.398 1.281-3.844 3H4v-5H2v7h3.156c.446 1.719 1.992 3 3.844 3c1.852 0 3.398-1.281 3.844-3h8.312c.446 1.719 1.992 3 3.844 3c1.852 0 3.398-1.281 3.844-3H32v-8.156l-.063-.157l-2-6L29.72 10H21V6zm1 4v2h9v-2zm20 2h7.281L30 17.125V23h-1.156c-.446-1.719-1.992-3-3.844-3c-1.852 0-3.398 1.281-3.844 3H21zM2 14v2h6v-2zm7 8c1.117 0 2 .883 2 2s-.883 2-2 2s-2-.883-2-2s.883-2 2-2zm16 0c1.117 0 2 .883 2 2s-.883 2-2 2s-2-.883-2-2s.883-2 2-2z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="shopping-cart" viewBox="0 0 32 32">
+            <path fill="black"
+                d="M5 7c-.55 0-1 .45-1 1s.45 1 1 1h2.219l2.625 10.5c.222.89 1.02 1.5 1.937 1.5H23.25c.902 0 1.668-.598 1.906-1.469L27.75 10H11l.5 2h13.656l-1.906 7H11.781L9.156 8.5A1.983 1.983 0 0 0 7.22 7zm17 14c-1.645 0-3 1.355-3 3s1.355 3 3 3s3-1.355 3-3s-1.355-3-3-3zm-9 0c-1.645 0-3 1.355-3 3s1.355 3 3 3s3-1.355 3-3s-1.355-3-3-3zm0 2c.563 0 1 .438 1 1c0 .563-.438 1-1 1c-.563 0-1-.438-1-1c0-.563.438-1 1-1zm9 0c.563 0 1 .438 1 1c0 .563-.438 1-1 1c-.563 0-1-.438-1-1c0-.563.438-1 1-1z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="gift" viewBox="0 0 32 32">
+            <path fill="black"
+                d="M12 5c-1.645 0-3 1.355-3 3c0 .352.074.684.188 1H4v6h1v13h22V15h1V9h-5.188A2.95 2.95 0 0 0 23 8c0-1.645-1.355-3-3-3c-1.75 0-2.938 1.328-3.719 2.438c-.105.148-.187.292-.281.437c-.094-.145-.176-.29-.281-.438C14.938 6.329 13.75 5 12 5zm0 2c.625 0 1.438.672 2.063 1.563c.152.218.128.23.25.437H12c-.566 0-1-.434-1-1c0-.566.434-1 1-1zm8 0c.566 0 1 .434 1 1c0 .566-.434 1-1 1h-2.313c.122-.207.098-.219.25-.438C18.563 7.673 19.375 7 20 7zM6 11h20v2h-9v-1h-2v1H6zm1 4h18v11h-8V16h-2v10H7z" />
+        </symbol>
+        <symbol xmlns="http://www.w3.org/2000/svg" id="return" viewBox="0 0 32 32">
+            <path fill="black"
+                d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13h-2c0 6.086-4.914 11-11 11S5 22.086 5 16S9.914 5 16 5c3.875 0 7.262 1.984 9.219 5H20v2h8V4h-2v3.719C23.617 4.844 20.02 3 16 3z" />
+        </symbol>
+    </svg>
+
+    <!-- <div id="searchDiv">
+        <button class="close" id="closeSearch">&times;</button>
+        Hi
+    </div> -->
+
+    <div class="modal fade" id="searchDiv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="btn-close " style="float: right; " data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    <div class="form-outline" data-mdb-input-init id="search-bar">
+                        <form method="GET">
+                            <input type="search" id="data" name="data" class="form-control"
+                                placeholder="Search by ID, Name, Email" />
+                            <button type="submit" class="btn " data-mdb-ripple-init style="background-color: black;">
+                                <!-- <i class="fas fa-search"></i> -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" fill="white" class="bi bi-search"
+                                    viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    <div id="pop-searches" style="margin-top: 30px;">
+                        <p style="font-size: 18px; margin-bottom: -5px;">Popular Searches</p>
+                        <ul class=" navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    Air Force 1
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    Jordan
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    Air Max
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    Air Blazer
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <header id="header" class="site-header text-black">
+        <nav id="header-nav" class="navbar navbar-expand-lg px-3">
+            <div class="container-fluid">
+                <a class="navbar-brand logo" th:href="@{/member/home/{id}(id=${user.id})}">
+                    <img src="/images/demo/dragon9.jpg" class="logo">
+                </a>
+
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar"
+                    aria-labelledby="bdNavbarOffcanvasLabel">
+                    <div class="offcanvas-header px-4 pb-0">
+                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas"
+                            aria-label="Close" data-bs-target="#bdNavbar"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul id="navbar"
+                            class="navbar-nav text-capitalize justify-content-end align-items-center flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link me-4" style="font-size: 19px;" th:href="@{/member/collection/{id}(id=${user.id})}"><b>Collection</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link me-4" style="font-size: 19px;" href="#footer"><b>About Us</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link me-4" style="font-size: 19px;"><b>FAQs</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <div class="user-items ps-5">
+                                    <ul class="d-flex justify-content-end list-unstyled">
+                                        <li class="pe-3">
+                                            <a id="searchIcon" data-bs-toggle="modal" data-bs-target="#searchDiv">
+                                                <svg class="search" width="25" height="25">
+                                                    <use xlink:href="#search"></use>
+                                                </svg>
+                                            </a>
+
+                                        </li>
+                                        <li class="pe-3">
+                                            <a href="@{/member/profile/{id}(id=${user.id})}">
+                                                <svg class="user" width="25" height="25">
+                                                    <use xlink:href="#user"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        <li class="pe-3">
+                                            <a id="cartIcon" data-bs-toggle="modal">
+                                                <svg class="cart" width="25" height="25">
+                                                    <use xlink:href="#cart"></use>
+                                                </svg>
+                                            </a>
+                                            <div class="previewCart p-4" style="width: 530px; background-color: white;"
+                                                id="previewCart">
+                                                <div id="previewCartDiv">
+                                                    <ul style="margin-left: 370px;">
+                                                        <li><strong>Quantity</strong></li>
+                                                    </ul>
+                                                    <div style="width: 100%;">
+                                                        <div id="previewCartItem">
+                                                            <div id="item">
+                                                                <img src="/images/demo/pic39.jpg">
+                                                                <div>
+                                                                    <p><strong>Air Jordan 1 Lost & Found</strong></p>
+                                                                    <p>Men's Shoes</p>
+                                                                    <p>Size US 8.5</p>
+                                                                    <p>$200</p>
+                                                                </div>
+                                                            </div>
+                                                            <div id="qty">
+                                                                <p>2</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="width: 100%;">
+                                                        <div id="previewCartItem">
+                                                            <div id="item">
+                                                                <img src="/images/demo/pic39.jpg">
+                                                                <div>
+                                                                    <p><strong>Air Jordan 1 Lost & Found</strong></p>
+                                                                    <p>Men's Shoes</p>
+                                                                    <p>Size US 8.5</p>
+                                                                    <p>$200</p>
+                                                                </div>
+                                                            </div>
+                                                            <div id="qty">
+                                                                <p>2</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="width: 100%;">
+                                                        <div id="previewCartItem">
+                                                            <div id="item">
+                                                                <img src="/images/demo/pic39.jpg">
+                                                                <div>
+                                                                    <p><strong>Air Jordan 1 Lost & Found</strong></p>
+                                                                    <p>Men's Shoes</p>
+                                                                    <p>Size US 8.5</p>
+                                                                    <p>$200</p>
+                                                                </div>
+                                                            </div>
+                                                            <div id="qty">
+                                                                <p>2</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr id="prevHr"
+                                                    style="margin-left: 50%; width: 50%;border: 1px solid black;">
+                                                <p style="margin-left: 80%;">Total: $600</p>
+                                                <a style="margin-left: 50px;" th:href="@{/member/cart/{id}(id=${user.id})}">
+                                                    <button id="checkout">Checkout</button>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div id="carouselExampleInterval" class="carousel slide mx-auto" data-bs-ride="carousel" style="margin-top: 150px;">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3"
+                aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4"
+                aria-label="Slide 5"></button>
+            <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="5"
+                aria-label="Slide 6"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="1500">
+                <img src="/images/demo/pic11.jpg" class="d-block w-100" alt="Image 8">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <div class="landing-images mx-auto hstack d-block w-100">
+                    <img src="/images/demo/pic60.jpg">
+                    <img src="/images/demo/pic61.jpg">
+                    <img src="/images/demo/pic62.jpg">
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <div class="landing-images mx-auto hstack d-block w-100">
+                    <img src="/images/demo/pic16.jpg">
+                    <img src="/images/demo/pic17.jpg">
+                    <img src="/images/demo/pic14.jpg">
+                </div>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="2000">
+                <div class="landing-images mx-auto hstack d-block w-100">
+                    <img src="/images/demo/pic19.jpg">
+                    <img src="/images/demo/pic27.jpg">
+                    <img src="/images/demo/pic28.jpg">
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <div class="landing-images mx-auto hstack d-block w-100">
+                    <img src="/images/demo/pic20.jpg">
+                    <img src="/images/demo/pic32.jpg">
+                    <img src="/images/demo/pic36.jpg">
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="landing-images mx-auto hstack d-block w-100">
+                    <img src="/images/demo/pic30.png">
+                    <img src="/images/demo/pic31.png">
+                    <img src="/images/demo/pic35.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="company-services" class="py-5 p-5 ">
+        <div class="container-fluid" style="margin-left: 60px;">
+            <div class="row align-items-center">
+                <div class="col-lg-3 col-md-6 pb-3">
+                    <div class="icon-box d-flex align-items-center">
+                        <div class="icon-box-icon pt-3 pe-3 pb-3 ps-3" style="color: black;">
+                            <svg class="shipping-fast">
+                                <use xlink:href="#shipping-fast" />
+                            </svg>
+                        </div>
+                        <div class="icon-box-content ps-3">
+                            <h3 class="card-title text-capitalize text-dark mb-0">Quick delivery</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 pb-3">
+                    <div class="icon-box d-flex align-items-center">
+                        <div class="icon-box-icon pt-3 pe-3 pb-3 ps-3">
+                            <svg class="shopping-cart">
+                                <use xlink:href="#shopping-cart" />
+                            </svg>
+                        </div>
+                        <div class="icon-box-content ps-3">
+                            <h3 class="card-title text-capitalize text-dark mb-0">Pick up in store</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 pb-3" style="width: 36%;">
+                    <div class="icon-box d-flex align-items-center">
+                        <div class="icon-box-icon pt-3 pe-3 pb-3 ps-3">
+                            <svg class="return">
+                                <use xlink:href="#return" />
+                            </svg>
+                        </div>
+                        <div class="icon-box-content ps-3">
+                            <h3 class="card-title text-capitalize text-dark mb-0">Return & refund policy</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="featured-products" class="product-store position-relative mx-auto">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="display-header pb-3 d-flex justify-content-between flex-wrap col-md-12">
+                    <h2 class="display-2 text-dark text-capitalize">New Arrivals</h2>
+                    <a th:href="@{/member/collection/{id}(id=${user.id})}" class="btn btn-medium btn-arrow btn-normal position-relative">
+                        <span class="text-capitalize">Shop All</span>
+                        <svg class="arrow-right position-absolute" width="18" height="20">
+                            <use xlink:href="#arrow-right"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div id="featured-swiper" class="product-swiper col-md-12">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="product-card image-zoom-effect link-effect d-flex flex-wrap">
+                                    <div class="image-holder">
+                                        <img src="/images/product-item4.jpg" alt="product-item"
+                                            class="product-image img-fluid">
+                                    </div>
+                                    <div class="cart-concern">
+                                        <h3 class="card-title text-capitalize pt-3 text-primary">
+                                            <a href="single-product.html" class="text-primary">Gold Chain</a>
+                                        </h3>
+                                        <div class="cart-info">
+                                            <a class="pseudo-text-effect" href="#"
+                                                data-after="More"><span>$200</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="product-card image-zoom-effect link-effect d-flex flex-wrap">
+                                    <div class="image-holder">
+                                        <img src="/images/product-item8.jpg" alt="product-item"
+                                            class="product-image img-fluid">
+                                    </div>
+                                    <div class="cart-concern">
+                                        <h3 class="card-title text-capitalize pt-3 text-primary">
+                                            <a href="single-product.html" class="text-primary">Teardrop Earrings</a>
+                                        </h3>
+                                        <div class="cart-info">
+                                            <a class="pseudo-text-effect" href="#" data-after="More">
+                                                <span>$200</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="product-card image-zoom-effect link-effect d-flex flex-wrap">
+                                    <div class="image-holder">
+                                        <img src="/images/product-item3.jpg" alt="product-item"
+                                            class="product-image img-fluid">
+                                    </div>
+                                    <div class="cart-concern">
+                                        <h3 class="card-title text-capitalize pt-3 text-primary">
+                                            <a href="single-product.html" class="text-primary">Gold Necklace</a>
+                                        </h3>
+                                        <div class="cart-info">
+                                            <a class="pseudo-text-effect" href="#" data-after="More">
+                                                <span>$200</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="product-card image-zoom-effect link-effect d-flex flex-wrap">
+                                    <div class="image-holder">
+                                        <img src="/images/product-item9.jpg" alt="product-item"
+                                            class="product-image img-fluid">
+                                    </div>
+                                    <div class="cart-concern">
+                                        <h3 class="card-title text-capitalize pt-3 text-primary">
+                                            <a href="single-product.html" class="text-primary">String Earrings</a>
+                                        </h3>
+                                        <div class="cart-info">
+                                            <a class="pseudo-text-effect" href="#" data-after="More">
+                                                <span>$200</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="product-card image-zoom-effect link-effect d-flex flex-wrap">
+                                    <div class="image-holder">
+                                        <img src="/images/product-item7.jpg" alt="product-item"
+                                            class="product-image img-fluid">
+                                    </div>
+                                    <div class="cart-concern">
+                                        <h3 class="card-title text-capitalize pt-3 text-primary">
+                                            <a href="single-product.html" class="text-primary">Stackable
+                                                Necklace</a>
+                                        </h3>
+                                        <div class="cart-info">
+                                            <a class="pseudo-text-effect" href="#" data-after="More">
+                                                <span>$200</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="product-card image-zoom-effect link-effect d-flex flex-wrap">
+                                    <div class="image-holder">
+                                        <img src="/images/product-item12.jpg" alt="product-item"
+                                            class="product-image img-fluid">
+                                    </div>
+                                    <div class="cart-concern">
+                                        <h3 class="card-title text-capitalize pt-3 text-primary">
+                                            <a href="single-product.html" class="text-primary">Flower Earrings</a>
+                                        </h3>
+                                        <div class="cart-info">
+                                            <a class="pseudo-text-effect" href="#" data-after="More">
+                                                <span>$200</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="swiper-pagination text-center mt-5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="testimonials" class="position-relative padding-xlarge">
+        <div class="container">
+            <div class="row">
+                <div class="offset-md-2 col-md-8">
+                    <h3 class="text-center mb-5" data-aos="fade" data-aos-easing="ease-in" data-aos-duration="1000"
+                        data-aos-once="true">
+                        What Our Customers Says
+                    </h3>
+                    <div class="review-content position-relative" data-aos="fade" data-aos-easing="ease-in"
+                        data-aos-duration="1500" data-aos-once="true">
+                        <div class="swiper testimonial-swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide text-center d-flex justify-content-center">
+                                    <div class="review-item">
+                                        <blockquote class="fs-3 fw-light">“I've been a customer for years and I'm
+                                            always impressed with their designs. Highly recommend!”</blockquote>
+                                        <div class="author-detail">
+                                            <div class="name fw-bold text-uppercase pt-2">Aaron Warner</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide text-center d-flex justify-content-center">
+                                    <div class="review-item">
+                                        <blockquote class="fs-3 fw-light">“I'm a repeat customer because of their
+                                            unique designs and great prices. Always a pleasure to shop here.”
+                                        </blockquote>
+                                        <div class="author-detail">
+                                            <div class="name fw-bold text-uppercase pt-2">Sal Sighn</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide text-center d-flex justify-content-center">
+                                    <div class="review-item">
+                                        <blockquote class="fs-3 fw-light">“Absolutely love their products! The
+                                            quality is top-notch and the customer service is exceptional.”
+                                        </blockquote>
+                                        <div class="author-detail">
+                                            <div class="name fw-bold text-uppercase pt-2">Sarah Thompson</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-buttons text-center mt-5" data-aos="fade" data-aos-easing="ease-in"
+                        data-aos-duration="1800" data-aos-once="true">
+                        <button class="swiper-prev testimonial-arrow-prev me-2">
+                            <svg width="30" height="30">
+                                <use xlink:href="#arrow-left"></use>
+                            </svg>
+                        </button>
+                        <span class="separator">|</span>
+                        <button class="swiper-next testimonial-arrow-next ms-2">
+                            <svg width="30" height="30">
+                                <use xlink:href="#arrow-right"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="collection-div" class="mx-auto">
+        <div class="collection collection1">
+            <div style="padding: 50px;">
+                <h2><b>Dunk Low</b></h2>
+                <a class=""><b>Shop Collection</b></a>
+            </div>
+            <img src="/images/demo/pic59.png" style="margin-top: 200px; float: right; margin-right: 20px;">
+        </div>
+        <div class="collection collection2 ">
+            <div style="padding: 50px; display: inline-block;">
+                <h2><b>Sandals</b></h2>
+                <a class=""><b>Shop Collection</b></a>
+            </div>
+            <img src="/images/demo/pic46.png" style="float: right; margin-top: 70px; margin-right: 30px;">
+
+        </div>
+        <div class="collection collection3">
+            <div style="padding: 50px; display: inline-block;">
+                <h2><b>Air Jordan 1</b></h2>
+                <a class=""><b>Shop Collection</b></a>
+            </div>
+            <img src="images/demo/pic47.png" style="float: right; margin-top: 50px; margin-right: 30px; ">
+        </div>
+        <div class="collection collection4" style="width: 100%;">
+            <img src="/images/demo/pic55.png" style="width: 100%; height: 100% ;">
+        </div>
+        <div class="collection collection5">
+            <div style="padding: 50px; ">
+                <h2><b>Blazer</b></h2>
+                <a class=""><b>Shop Collection</b></a>
+            </div>
+            <img src="/images/demo/pic50.png" style="float: right; margin-top: 200px; margin-right: 20px;">
+
+        </div>
+    </div>
+    <footer class="footer" id="footer" style="margin-top:100px;">
+        <div class="container"  style="width: 77%;">
+            <div class="row">
+                <div class="footer-col" style="width: 35%;">
+                    <h4>company</h4>
+                    <ul>
+                        <li class="footer-text">Step into style and comfort with our premium footwear collection,
+                            designed to elevate your every stride.</li>
+                        <li><a href="#">
+                                <span class="material-symbols-outlined">
+                                    location_on
+                                </span> Mandalay, Myanmar
+                            </a></li>
+                        <li><a href="#">
+                                <span class="material-symbols-outlined">
+                                    call
+                                </span> 0912345678
+                            </a></li>
+                        <li><a href="#">
+                                <span class="material-symbols-outlined">
+                                    mail
+                                </span> dragonshoes@gmail.com
+                            </a></li>
+                    </ul>
+                </div>
+                <div class="footer-col" style="width: 25%;">
+                    <h4>get help</h4>
+                    <ul>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">order</a></li>
+                        <li><a href="#">collections</a></li>
+                        <li><a href="#">Account</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col vstack" style="width: 40%;">
+                    <div>
+                        <h4>follow us</h4>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        </div>
+                    </div>
+                    <div style="margin-top: 50px;">
+                        <h4>Subscribe</h4>
+                        <ul>
+                            <li class="footer-text">
+                                Stay ahead in style—subscribe to our newsletter for exclusive offers, latest arrivals,
+                                and insider tips!
+                            </li>
+                            <div class="subscribe-form" style="margin-left: -30px; font-size: 18px;">
+                                <form action="#">
+                                    <input type="text" placeholder="Email Address">
+                                    <button style="height: 60px;"><i class="fa-sharp fa-solid fa-paper-plane fa-lg"
+                                            style="color: #ffffff;"></i></button>
+                                </form>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/31ae109b78.js" crossorigin="anonymous"></script>
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    
+    <script>
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var myCarousel = document.querySelector('#carouselExampleInterval');
+            var carousel = new bootstrap.Carousel(myCarousel, {
+                wrap: true
+            });
+        });
+        var swiperProduct = new Swiper('.product-swiper .swiper', {
+            slidesPerView: 4,
+            spaceBetween: 10,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        var swiperReview = new Swiper('.testimonial-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            loop: true,
+            navigation: {
+                nextEl: '.testimonial-arrow-next',
+                prevEl: '.testimonial-arrow-prev',
+            },
+
+        });
+
+        //To reveal collection slowly
+        document.addEventListener('scroll', function () {
+            const revealDiv = document.getElementById('collection-div');
+            const rect = revealDiv.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+            if (rect.top <= windowHeight * 0.75) { // Trigger when the div is 75% in view
+                const items = revealDiv.querySelectorAll('.collection');
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('reveal');
+                    }, index * 500); // Delay each item by 500ms
+                });
+            }
+        });
+        
+        const icon = document.getElementById('cartIcon');
+        const infoBox = document.querySelector('.previewCart');
+
+        icon.addEventListener('click', function () {
+            if (infoBox.style.display === 'block') {
+                infoBox.style.display = 'none';
+            } else {
+                infoBox.style.display = 'block';
+                var cartHeight = document.getElementById('previewCart').offsetHeight;
+                const extraHeight = -220; 
+                const totalHeight = cartHeight + extraHeight;
+                prevHr.style.marginTop = `${totalHeight}px`;
+            }
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!icon.contains(event.target) && !infoBox.contains(event.target)) {
+                infoBox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
